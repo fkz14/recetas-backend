@@ -6,7 +6,7 @@ let recipes = [];
 export const createRecipe = (req, res) => {
   const { title, description, ingredients } = req.body;
 
-  if (!title || !description || !ingredients) {
+  if (!title?.trim() || !description?.trim() || !ingredients?.trim()) {
     return res.status(400).json({
       message: "Todos los campos son obligatorios",
     });
@@ -17,7 +17,7 @@ export const createRecipe = (req, res) => {
     title,
     description,
     ingredients,
-    userId: req.user.id, 
+    userId: req.user.id,
   };
 
   recipes.push(newRecipe);
@@ -32,9 +32,7 @@ export const createRecipe = (req, res) => {
  * OBTENER MIS RECETAS
  */
 export const getMyRecipes = (req, res) => {
-  const userRecipes = recipes.filter(
-    (recipe) => recipe.userId === req.user.id
-  );
+  const userRecipes = recipes.filter((recipe) => recipe.userId === req.user.id);
 
   res.json(userRecipes);
 };

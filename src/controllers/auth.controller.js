@@ -26,7 +26,7 @@ export const register = async (req, res) => {
     });
   }
 
-  // 3. Hashear contraseña 
+  // 3. Hashear contraseña
   const hashedPassword = await bcrypt.hash(password, 10);
 
   // 4. Crear usuario
@@ -76,8 +76,10 @@ export const login = async (req, res) => {
       id: user.id,
       email: user.email,
     },
-    "secretkey",
-    { expiresIn: "1h" }
+    process.env.JWT_SECRET,
+    {
+      expiresIn: "12h",
+    },
   );
 
   // 4. Respuesta

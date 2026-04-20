@@ -9,12 +9,15 @@ import {
 
 const router = Router();
 
-// privadas
-router.post("/", authMiddleware, createRecipe);
-router.get("/my", authMiddleware, getMyRecipes);
-router.put("/:id", authMiddleware, updateRecipe);
-
-// pública
+// pública 
 router.get("/:id", getRecipeById);
+
+// middleware para rutas privadas
+router.use(authMiddleware);
+
+// privadas
+router.post("/", createRecipe);
+router.get("/my", getMyRecipes);
+router.put("/:id", updateRecipe);
 
 export default router;

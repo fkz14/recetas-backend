@@ -42,21 +42,13 @@ export const createRecipe = (req, res) => {
  * OBTENER MIS RECETAS
  */
 export const getMyRecipes = (req, res) => {
-  try {
-    const userRecipes = recipes.filter(
-      (recipe) => recipe.userId === req.user.id
-    );
+  const userId = Number(req.user.id);
 
-    return res.json({
-      recipes: userRecipes,
-    });
-  } catch (error) {
-    console.error("Get recipes error:", error);
+  const userRecipes = recipes.filter(
+    (recipe) => Number(recipe.userId) === userId
+  );
 
-    return res.status(500).json({
-      message: "Error al obtener recetas",
-    });
-  }
+  res.json(userRecipes);
 };
 
 /**
@@ -127,9 +119,9 @@ export const getRecipeById = (req, res) => {
       });
     }
 
-    return res.json({
-      recipe,
-    });
+    // 🔥 DEVOLVER DIRECTO
+    return res.json(recipe);
+
   } catch (error) {
     console.error("Get recipe error:", error);
 

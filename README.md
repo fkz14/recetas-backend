@@ -10,7 +10,6 @@ Esta es una API backend moderna que proporciona autenticación segura con JWT, g
 
 **Estado:** Producción lista (con base de datos)  
 **Versión:** 1.0.0  
-**Licencia:** ISC
 
 ---
 
